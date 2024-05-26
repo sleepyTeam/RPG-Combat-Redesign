@@ -823,7 +823,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.8396226, g: 0.6455589, b: 0.6455589, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -899,7 +899,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.8396226, g: 0.6455589, b: 0.6455589, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1419,7 +1419,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.8396226, g: 0.6455589, b: 0.6455589, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1783,7 +1783,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 429f92240c0bb314d9485fed2fbfc07e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 2
+  moveSpeed: 4
+  checkChange: 0
   rb: {fileID: 1167516760}
   stats: {fileID: 1167516761}
 --- !u!50 &1167516760
@@ -1819,13 +1820,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d45d05e502ab184d95c76e7eba34cc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 0
+  max_health: 100
+  current_health: 100
   healthPercent: 0
   ap_max: 6
   ap_base_rate: 0
-  ms_modifier: 0
+  baseMS: 0
   damage_modifier: 0
   ap_rate_modifier: 0
+  pC: {fileID: 1167516759}
 --- !u!1 &1242797234
 GameObject:
   m_ObjectHideFlags: 0
@@ -2087,6 +2090,7 @@ GameObject:
   - component: {fileID: 1382616622}
   - component: {fileID: 1382616621}
   - component: {fileID: 1382616620}
+  - component: {fileID: 1382616624}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -2180,6 +2184,28 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1382616624
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1382616619}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f144ff8f2a908f48baed61786c95795, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stats: {fileID: 1167516761}
+  indicators:
+  - {fileID: 53864975}
+  - {fileID: 1242797234}
+  - {fileID: 861541086}
+  icons: []
+  textboxes: []
+  buff_color: {r: 0.052198302, g: 0.4811321, b: 0.16970628, a: 1}
+  debuff_color: {r: 0.5754717, g: 0.13843894, b: 0.13843894, a: 1}
+  neutral_color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &1533467411
 GameObject:
   m_ObjectHideFlags: 0
@@ -2412,6 +2438,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1708358090}
+  - component: {fileID: 1708358091}
   m_Layer: 5
   m_Name: HPBar
   m_TagString: Untagged
@@ -2441,6 +2468,21 @@ RectTransform:
   m_AnchoredPosition: {x: -303, y: 166}
   m_SizeDelta: {x: 206.25, y: 21.25}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1708358091
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1708358089}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef44b4dde0a399f46a6f3f03fc2d0c76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stats: {fileID: 1167516761}
+  fillPercent: 0
+  hpBar: {fileID: 2009149044}
 --- !u!1 &1726629424
 GameObject:
   m_ObjectHideFlags: 0

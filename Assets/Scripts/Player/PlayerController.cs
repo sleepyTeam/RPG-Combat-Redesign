@@ -1,14 +1,18 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float moveSpeed;
+    public float moveSpeed = 2;
+    public bool checkChange;
+
+
     public Rigidbody2D rb;
     private Vector2 movement;
     public PlayerStats stats;
-
 
     private void Update()
     {
