@@ -13,16 +13,21 @@ public class PlayerController : MonoBehaviour
     private Vector2 movement;
     public PlayerStats stats;
     public float CurrentAP= 0;
-
+    public float APMax;
     private void Start()
     {
+        APMax = stats.ap_max;
         apRate = stats.ap_base_rate;
     }
     private void Update()
     {
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
-        CurrentAP += apRate/100;
+        
+        if((CurrentAP += apRate / 100) >= 100)
+        {
+            CurrentAP = 100;
+        };
     }
     
     private void FixedUpdate() //fixed update is called at regular intervals 
