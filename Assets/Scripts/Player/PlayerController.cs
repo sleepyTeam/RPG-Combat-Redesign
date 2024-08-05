@@ -7,17 +7,22 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public float moveSpeed = 2;
-    public bool checkChange;
-
+    public float apRate;
 
     public Rigidbody2D rb;
     private Vector2 movement;
     public PlayerStats stats;
+    public float CurrentAP= 0;
 
+    private void Start()
+    {
+        apRate = stats.ap_base_rate;
+    }
     private void Update()
     {
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
+        CurrentAP += apRate/100;
     }
     
     private void FixedUpdate() //fixed update is called at regular intervals 

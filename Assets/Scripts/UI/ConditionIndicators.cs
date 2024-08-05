@@ -52,9 +52,33 @@ public class ConditionIndicators : MonoBehaviour
         
     }
 
+    void setApRate ()
+    {
+        Image icon = icons[2];
+        float apRateMod = stats.ap_rate_modifier;
+        TextMeshProUGUI text = textboxes[2];
+
+        if (apRateMod > 0)
+        {
+            text.text = "+ " + (apRateMod * 100).ToString() + "%";
+            icon.color = buff_color;
+        }
+        else if (apRateMod == 0)
+        {
+            text.text = "+0%";
+            icon.color = neutral_color;
+        }
+        else
+        {
+            text.text = (apRateMod * 100).ToString() + "%";
+            icon.color = debuff_color;
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
         setMoveSpeed();
+        setApRate();
     }
 }
