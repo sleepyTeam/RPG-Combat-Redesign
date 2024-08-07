@@ -14,7 +14,8 @@ public class PlayerController : MonoBehaviour
     public PlayerStats stats;
     public float CurrentAP= 0;
     public float APMax;
-    private void Start()
+    
+    private void Awake()
     {
         APMax = stats.ap_max;
         apRate = stats.ap_base_rate;

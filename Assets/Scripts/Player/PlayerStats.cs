@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.PlasticSCM.Editor.WebApi;
 using Unity.VisualScripting;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
@@ -10,7 +9,7 @@ public class PlayerStats : MonoBehaviour
     // health
 
     public int max_health;
-    public int current_health;
+    [Range(0f,100f)] public int current_health;
     public float healthPercent;
 
     // ap
@@ -54,25 +53,41 @@ public class PlayerStats : MonoBehaviour
     }
 
     //Damage
-    private int base_damage;
-
-    public float damage_modifier;
+    public int base_damage;
+    private float modified_Damage;
+    public float _damage_modifier;
+    public float damage_modifier
+    {
+        get { return _damage_modifier; }
+        set
+        {
+            if (_damage_modifier == value) return;
+            _damage_modifier = value;
+            if(damageChange != null)
+                damageChange(_damage_modifier);
+        }
+    }
+    public void damageChangeHandler(float value)
+    {
+        modified_Damage = base_damage* (1+value);
+    }
 
     public PlayerController pC;
     public delegate void OnVarChangeDelegate(float value);
     public event OnVarChangeDelegate msChange;
     public event OnVarChangeDelegate apChange;
-
+    public event OnVarChangeDelegate damageChange;
     private void Start()
     {
         baseMS = pC.moveSpeed;
         msChange += msChangeHandler;
         apChange += apChangeHandler;
+        damageChange += damageChangeHandler;
     }
 
     private void Update()
     {
-        healthPercent = (float)current_health / max_health *100;
+        healthPercent = (float)current_health / max_health;
         if (Input.GetKeyDown(KeyCode.Space))
         {
             msModifier += .25f;
@@ -81,7 +96,6 @@ public class PlayerStats : MonoBehaviour
         {
             msModifier -= .25f;
         }
-
         if (Input.GetKeyDown(KeyCode.Z))
         {
             ap_rate_modifier += .25f;
@@ -89,6 +103,14 @@ public class PlayerStats : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.X))
         {
             ap_rate_modifier -= .25f;
+        }
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            damage_modifier += .25f;
+        }
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            damage_modifier -= .25f;
         }
     }
 }

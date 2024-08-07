@@ -563,8 +563,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.71, y: 0.000015258789}
-  m_SizeDelta: {x: 18.07, y: 100}
+  m_AnchoredPosition: {x: -0.75, y: -0.9}
+  m_SizeDelta: {x: 18.06, y: 90.77}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &441982419
 MonoBehaviour:
@@ -1813,7 +1813,8 @@ MonoBehaviour:
   ap_max: 100
   ap_base_rate: 3
   baseMS: 0
-  damage_modifier: 0
+  base_damage: 2
+  _damage_modifier: 0
   pC: {fileID: 1167516759}
 --- !u!1 &1189816086
 GameObject:
@@ -2160,8 +2161,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.89, y: 0.000015258789}
-  m_SizeDelta: {x: 114.4, y: 100}
+  m_AnchoredPosition: {x: -1.02, y: 0.0010822}
+  m_SizeDelta: {x: 114.25, y: 108.91}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1369060630
 MonoBehaviour:

@@ -74,11 +74,34 @@ public class ConditionIndicators : MonoBehaviour
             icon.color = debuff_color;
         }
     }
+    void setDamageModifier()
+    {
+        Image icon = icons[1];
+        float damageMod = stats.damage_modifier;
+        TextMeshProUGUI text = textboxes[1];
+
+        if (damageMod > 0)
+        {
+            text.text = "+ " + (damageMod * 100).ToString() + "%";
+            icon.color = buff_color;
+        }
+        else if (damageMod == 0)
+        {
+            text.text = "+0%";
+            icon.color = neutral_color;
+        }
+        else
+        {
+            text.text = (damageMod * 100).ToString() + "%";
+            icon.color = debuff_color;
+        }
+    }
 
     // Update is called once per frame
     void Update()
     {
         setMoveSpeed();
         setApRate();
+        setDamageModifier();
     }
 }
