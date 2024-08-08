@@ -9,36 +9,56 @@ public class APBar : MonoBehaviour
     [SerializeField] float apMax;
     public PlayerStats stats;
     [SerializeField] PlayerController pC;
-    float Current_AP;
+    public float Current_AP;
     public Image ExertImage;
     public Image APImage;
+    public float maxFill;
+    public float ExertRecoveryRate;
+    public float TotalExertion;
     private void Start()
     {
         apRate = pC.apRate;
-        apMax = pC.APMax;
+        maxFill = pC.APMax;
+        ExertRecoveryRate = apRate / 2;
     }
     private void Update()
     {
+        if (Current_AP < maxFill)
+        {
+            Current_AP = pC.CurrentAP;
+        }
+        else Current_AP = maxFill;
         
-        Current_AP = pC.CurrentAP;
         FillBar(Current_AP);
         if (Input.GetKeyDown(KeyCode.E)){
             Exert(15);
         }
+
+        if(TotalExertion > 0)
+        {
+            //Recovery(ExertRecoveryRate);
+        }
     }
     public void Exert(int ap_Cost)
     {
-        float baseAP = apMax;
-        float fillPercent = ap_Cost/baseAP;
-        apMax -= ap_Cost;
-        pC.APMax -= ap_Cost;
+        TotalExertion += ap_Cost;
+        float fillPercent = ap_Cost/apMax;
+        maxFill -= ap_Cost;
         ExertImage.fillAmount += fillPercent;
     }
     public void FillBar(float currentAP)
     {
-        float maxfill = apMax;
-        float fillPercent = currentAP / maxfill;
-        APImage.fillAmount = fillPercent;
-        
+        float maxFillPercent = maxFill / 100; 
+        float fillPercent = currentAP / apMax;
+        if (fillPercent <= maxFillPercent)
+            APImage.fillAmount = fillPercent;
+        else
+            APImage.fillAmount = maxFillPercent; 
     }
+    //public void Recovery(float recoveryRate)
+    //{
+    //    TotalExertion -= recoveryRate;
+    //    maxFill += recoveryRate;
+    //    ExertImage.fillAmount -= TotalExertion / apMax;
+    //}
 }
