@@ -19,7 +19,8 @@ public class PlayerController : MonoBehaviour
     public EnemyBehaviour SelectedEnemy;
     public int selectionIndex;
     public GameObject selectionIndicator;
-    
+    public GameObject[] enemies;
+    public GameObject selectionModeIndicator;
     private void Awake()
     {
         APMax = stats.ap_max;
@@ -27,6 +28,7 @@ public class PlayerController : MonoBehaviour
     }
     private void Update()
     {
+        selectionModeIndicator.SetActive(EnemySelectionMode);
         selectionIndicator.SetActive(EnemySelectionMode);
         if(Input.GetKeyDown(KeyCode.Return))
         {
@@ -47,11 +49,19 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.LeftArrow))
             {
                 selectionIndex -= 1;
+                if(selectionIndex < 0)
+                {
+                    selectionIndex = enemies.Length - 1;
+                }
                 SelectedEnemy = EnemySelect(selectionIndex);
             }
             else if (Input.GetKeyDown(KeyCode.RightArrow))
             {
                 selectionIndex += 1;
+                if(selectionIndex > enemies.Length - 1)
+                {
+                    selectionIndex = 0;
+                }
                 SelectedEnemy = EnemySelect(selectionIndex);
             }
             else
@@ -80,7 +90,7 @@ public class PlayerController : MonoBehaviour
     }
     public EnemyBehaviour EnemySelect(int index)
     {
-        GameObject[] enemies = GetEnemies();
+        enemies = GetEnemies();
         GameObject enemy = enemies[index];
         return enemy.GetComponent<EnemyBehaviour>();
     }

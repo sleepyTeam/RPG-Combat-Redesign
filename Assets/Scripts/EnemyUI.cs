@@ -19,8 +19,12 @@ public class EnemyUI : MonoBehaviour
     private void Update()
     {
         selectedEnemy = playerController.SelectedEnemy;
-        enemyName.text = selectedEnemy.EnemyStats.EnemyName;
-        selectionIndicator.transform.position = selectedEnemy.transform.position;
+        if(selectedEnemy!= null)
+        {
+            enemyName.text = selectedEnemy.EnemyStats.EnemyName;
+            selectionIndicator.transform.position = selectedEnemy.transform.position;
+        }
+        
         
     }
             
